@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 22, 2024 lúc 04:57 AM
+-- Thời gian đã tạo: Th5 24, 2024 lúc 06:29 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -24,12 +24,52 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `diem`
+--
+
+CREATE TABLE `diem` (
+  `id` int(11) NOT NULL,
+  `diem15Phut` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`diem15Phut`)),
+  `diem45phut` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`diem45phut`)),
+  `diemGk` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`diemGk`)),
+  `diemCk` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`diemCk`)),
+  `tongKet` double DEFAULT NULL,
+  `idSinhVien` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `giaovien`
+--
+
+CREATE TABLE `giaovien` (
+  `id` int(11) NOT NULL,
+  `nameGiaoVien` varchar(255) NOT NULL,
+  `ngaySinh` varchar(255) NOT NULL,
+  `gioiTinh` varchar(255) DEFAULT NULL,
+  `diaChi` varchar(255) NOT NULL,
+  `soDienThoai` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `anhDaiDien` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `giaovien`
+--
+
+INSERT INTO `giaovien` (`id`, `nameGiaoVien`, `ngaySinh`, `gioiTinh`, `diaChi`, `soDienThoai`, `email`, `anhDaiDien`) VALUES
+(6, 'Trần Thanh Vũ', '2003-04-10', 'Nam', 'Dĩ An', '0379886918', 'lethicuba@gmail.com', '51e2b6facb124afea37f69a4da45425d.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `lophoc`
 --
 
 CREATE TABLE `lophoc` (
   `id` int(11) NOT NULL,
-  `giaoVienChuNhiem` varchar(255) NOT NULL,
+  `giaoVienChuNhiem` int(11) NOT NULL,
   `tenLopHoc` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -38,10 +78,10 @@ CREATE TABLE `lophoc` (
 --
 
 INSERT INTO `lophoc` (`id`, `giaoVienChuNhiem`, `tenLopHoc`) VALUES
-(1, 'Nguyen Thanh Vu', 'DH21DTD'),
-(32, '412421', 'fasfasf'),
-(33, '412421', 'fasfasf'),
-(34, '412421', '412412');
+(38, 3, '12A'),
+(40, 4, '13A'),
+(41, 6, '12A'),
+(42, 6, '12B');
 
 -- --------------------------------------------------------
 
@@ -54,7 +94,8 @@ CREATE TABLE `sinhvien` (
   `MSSV` varchar(255) NOT NULL,
   `hoVaTen` varchar(255) NOT NULL,
   `soDienThoai` char(20) DEFAULT NULL,
-  `birthday` date NOT NULL,
+  `soDienThoaiPhuHuynh` varchar(255) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
   `gioiTinh` varchar(255) NOT NULL,
   `diaChi` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -62,13 +103,29 @@ CREATE TABLE `sinhvien` (
   `hinhAnh` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Đang đổ dữ liệu cho bảng `sinhvien`
+-- Cấu trúc bảng cho bảng `thoikhoabieu`
 --
 
-INSERT INTO `sinhvien` (`id`, `MSSV`, `hoVaTen`, `soDienThoai`, `birthday`, `gioiTinh`, `diaChi`, `email`, `idLopHoc`, `hinhAnh`) VALUES
-(1, '21130616', 'Tran Thanh Vu', '0379886918', '2003-04-10', 'Nam', 'Chung Cu Ht Pearl', 'lethicuba1004@gmail.com', 1, 'qc.png'),
-(37, '1234125', '123', '114', '2003-04-10', 'nam', '412412412412', 'cccccccccccccccccccc@gmail.com', 1, 'c01412ded1994b8ea213e5a56a014532.png');
+CREATE TABLE `thoikhoabieu` (
+  `id` int(11) NOT NULL,
+  `thu2` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`thu2`)),
+  `thu3` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`thu3`)),
+  `thu4` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`thu4`)),
+  `thu5` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`thu5`)),
+  `thu6` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`thu6`)),
+  `idLopHoc` int(11) DEFAULT NULL,
+  `buoi` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thoikhoabieu`
+--
+
+INSERT INTO `thoikhoabieu` (`id`, `thu2`, `thu3`, `thu4`, `thu5`, `thu6`, `idLopHoc`, `buoi`) VALUES
+(26, '{\"MonHoc\":[{\"Tiet\":\"1\",\"TenMon1\":\"Toán\",\"GiaoVien1\":\"6\",\"ThoiGian1\":\"45 Phút\"},{\"Tiet\":\"2\",\"TenMon2\":\"Toán\",\"ThoiGian2\":\"45 Phút\",\"GiaoVien2\":\"6\"},{\"TenMon3\":\"\",\"Tiet\":\"3\",\"GiaoVien3\":\"6\",\"ThoiGian3\":\"45 Phút\"},{\"GiaoVien4\":\"6\",\"TenMon4\":\"\",\"Tiet\":\"4\",\"ThoiGian4\":\"45 Phút\"},{\"GiaoVien5\":\"6\",\"ThoiGian5\":\"45 Phút\",\"TenMon5\":\"\",\"Tiet\":\"5\"}]}', '{\"MonHoc1\":[{\"Tiet\":\"1\",\"TenMon1\":\"\",\"GiaoVien1\":\"6\",\"ThoiGian1\":\"45 Phút\"},{\"Tiet\":\"2\",\"TenMon2\":\"\",\"ThoiGian2\":\"45 Phút\",\"GiaoVien2\":\"6\"},{\"TenMon3\":\"\",\"Tiet\":\"3\",\"GiaoVien3\":\"6\",\"ThoiGian3\":\"45 Phút\"},{\"GiaoVien4\":\"6\",\"TenMon4\":\"\",\"Tiet\":\"4\",\"ThoiGian4\":\"45 Phút\"},{\"GiaoVien5\":\"6\",\"ThoiGian5\":\"45 Phút\",\"TenMon5\":\"\",\"Tiet\":\"5\"}]}', '{\"MonHoc2\":[{\"Tiet\":\"1\",\"TenMon1\":\"\",\"GiaoVien1\":\"6\",\"ThoiGian1\":\"45 Phút\"},{\"Tiet\":\"2\",\"TenMon2\":\"\",\"ThoiGian2\":\"45 Phút\",\"GiaoVien2\":\"6\"},{\"TenMon3\":\"\",\"Tiet\":\"3\",\"GiaoVien3\":\"6\",\"ThoiGian3\":\"45 Phút\"},{\"GiaoVien4\":\"6\",\"TenMon4\":\"\",\"Tiet\":\"4\",\"ThoiGian4\":\"45 Phút\"},{\"GiaoVien5\":\"6\",\"ThoiGian5\":\"45 Phút\",\"TenMon5\":\"\",\"Tiet\":\"5\"}]}', '{\"MonHoc3\":[{\"Tiet\":\"1\",\"TenMon1\":\"\",\"GiaoVien1\":\"6\",\"ThoiGian1\":\"45 Phút\"},{\"Tiet\":\"2\",\"TenMon2\":\"\",\"ThoiGian2\":\"45 Phút\",\"GiaoVien2\":\"6\"},{\"TenMon3\":\"\",\"Tiet\":\"3\",\"GiaoVien3\":\"6\",\"ThoiGian3\":\"45 Phút\"},{\"GiaoVien4\":\"6\",\"TenMon4\":\"\",\"Tiet\":\"4\",\"ThoiGian4\":\"45 Phút\"},{\"GiaoVien5\":\"6\",\"ThoiGian5\":\"45 Phút\",\"TenMon5\":\"\",\"Tiet\":\"5\"}]}', '{\"MonHoc4\":[{\"Tiet\":\"1\",\"TenMon1\":\"\",\"GiaoVien1\":\"6\",\"ThoiGian1\":\"45 Phút\"},{\"Tiet\":\"2\",\"TenMon2\":\"\",\"ThoiGian2\":\"45 Phút\",\"GiaoVien2\":\"6\"},{\"TenMon3\":\"\",\"Tiet\":\"3\",\"GiaoVien3\":\"6\",\"ThoiGian3\":\"45 Phút\"},{\"GiaoVien4\":\"6\",\"TenMon4\":\"\",\"Tiet\":\"4\",\"ThoiGian4\":\"45 Phút\"},{\"GiaoVien5\":\"6\",\"ThoiGian5\":\"45 Phút\",\"TenMon5\":\"\",\"Tiet\":\"5\"}]}', 41, 0);
 
 -- --------------------------------------------------------
 
@@ -105,11 +162,25 @@ INSERT INTO `users` (`id`, `userName`, `fullName`, `email`, `phoneNumber`, `addr
 --
 
 --
+-- Chỉ mục cho bảng `diem`
+--
+ALTER TABLE `diem`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_diem` (`idSinhVien`);
+
+--
+-- Chỉ mục cho bảng `giaovien`
+--
+ALTER TABLE `giaovien`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `lophoc`
 --
 ALTER TABLE `lophoc`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `categoryId` (`tenLopHoc`);
+  ADD KEY `categoryId` (`tenLopHoc`),
+  ADD KEY `lophoc_ibfk_1` (`giaoVienChuNhiem`);
 
 --
 -- Chỉ mục cho bảng `sinhvien`
@@ -117,6 +188,13 @@ ALTER TABLE `lophoc`
 ALTER TABLE `sinhvien`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idLopHoc` (`idLopHoc`);
+
+--
+-- Chỉ mục cho bảng `thoikhoabieu`
+--
+ALTER TABLE `thoikhoabieu`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_lophoc` (`idLopHoc`);
 
 --
 -- Chỉ mục cho bảng `users`
@@ -129,16 +207,34 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `diem`
+--
+ALTER TABLE `diem`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `giaovien`
+--
+ALTER TABLE `giaovien`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT cho bảng `lophoc`
 --
 ALTER TABLE `lophoc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT cho bảng `sinhvien`
 --
 ALTER TABLE `sinhvien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
+--
+-- AUTO_INCREMENT cho bảng `thoikhoabieu`
+--
+ALTER TABLE `thoikhoabieu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
@@ -151,10 +247,22 @@ ALTER TABLE `users`
 --
 
 --
+-- Các ràng buộc cho bảng `diem`
+--
+ALTER TABLE `diem`
+  ADD CONSTRAINT `fk_diem` FOREIGN KEY (`idSinhVien`) REFERENCES `sinhvien` (`id`);
+
+--
 -- Các ràng buộc cho bảng `sinhvien`
 --
 ALTER TABLE `sinhvien`
   ADD CONSTRAINT `sinhvien_ibfk_1` FOREIGN KEY (`idLopHoc`) REFERENCES `lophoc` (`id`);
+
+--
+-- Các ràng buộc cho bảng `thoikhoabieu`
+--
+ALTER TABLE `thoikhoabieu`
+  ADD CONSTRAINT `fk_lophoc` FOREIGN KEY (`idLopHoc`) REFERENCES `lophoc` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

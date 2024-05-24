@@ -57,19 +57,6 @@ public class QuanliuserServlet extends HttpServlet {
 		request.setAttribute("sinhVien", sinhViens);
 		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
 	}
-	protected void doGet_Remove(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String id = request.getParameter("id");
-		SinhVienModel sinhVienModel = new SinhVienModel();
-		if (sinhVienModel.removeHocSinh(Integer.parseInt(id))) {
-			response.sendRedirect("quanliuser");
-			
-		}else {
-			request.setAttribute("p", "../admin/user.jsp");
-			request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
-
-		}
-	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

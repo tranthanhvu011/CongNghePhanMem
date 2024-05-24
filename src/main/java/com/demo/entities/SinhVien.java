@@ -7,6 +7,8 @@ public class SinhVien {
 	private String mssv;
 	private String hoVaTen;
 	private String soDienThoai;
+	private String soDienThoaiPhuHuynh;
+	private String parents;
 	private Date birDate;
 	private String gioiTinh;
 	private String diaChi;
@@ -14,8 +16,15 @@ public class SinhVien {
 	private int idLopHoc;
 	private String nameLopHoc;
 	private String hinhAnh;
+	private String birthday;
 	
 	
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
 	public String getHinhAnh() {
 		return hinhAnh;
 	}
@@ -67,6 +76,34 @@ public class SinhVien {
 	public String getEmail() {
 		return email;
 	}
+	
+	
+	
+	public SinhVien(String mssv, String hoVaTen, String soDienThoai, String soDienThoaiPhuHuynh, String diaChi,
+			String email, int idLopHoc, String hinhAnh, String birthday) {
+		super();
+		this.mssv = mssv;
+		this.hoVaTen = hoVaTen;
+		this.soDienThoai = soDienThoai;
+		this.soDienThoaiPhuHuynh = soDienThoaiPhuHuynh;
+		this.diaChi = diaChi;
+		this.email = email;
+		this.idLopHoc = idLopHoc;
+		this.hinhAnh = hinhAnh;
+		this.birthday = birthday;
+	}
+	public String getSoDienThoaiPhuHuynh() {
+		return soDienThoaiPhuHuynh;
+	}
+	public void setSoDienThoaiPhuHuynh(String soDienThoaiPhuHuynh) {
+		this.soDienThoaiPhuHuynh = soDienThoaiPhuHuynh;
+	}
+	public String getParents() {
+		return parents;
+	}
+	public void setParents(String parents) {
+		this.parents = parents;
+	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -83,11 +120,14 @@ public class SinhVien {
 	public void setMssv(String mssv) {
 		this.mssv = mssv;
 	}
+
+	
 	@Override
 	public String toString() {
-		return "SinhVien [id=" + id + ", hoVaTen=" + hoVaTen + ", soDienThoai=" + soDienThoai + ", birDate=" + birDate
+		return "SinhVien [id=" + id + ", mssv=" + mssv + ", hoVaTen=" + hoVaTen + ", soDienThoai=" + soDienThoai
+				+ ", soDienThoaiPhuHuynh=" + soDienThoaiPhuHuynh + ", parents=" + parents + ", birDate=" + birDate
 				+ ", gioiTinh=" + gioiTinh + ", diaChi=" + diaChi + ", email=" + email + ", idLopHoc=" + idLopHoc
-				+ ", nameLopHoc=" + nameLopHoc + "]";
+				+ ", nameLopHoc=" + nameLopHoc + ", hinhAnh=" + hinhAnh + "]";
 	}
 	public SinhVien(String hoVaTen, String soDienThoai, Date birDate, String gioiTinh, String diaChi,
 			String email, int idLopHoc) {
@@ -103,6 +143,37 @@ public class SinhVien {
 	public SinhVien() {
 		super();
 	}
+	
+
+	public SinhVien(String mssv, String hoVaTen, String soDienThoai, String soDienThoaiPhuHuynh, Date birDate,
+			String gioiTinh, String diaChi, String email, int idLopHoc, String hinhAnh) {
+		super();
+		this.mssv = mssv;
+		this.hoVaTen = hoVaTen;
+		this.soDienThoai = soDienThoai;
+		this.soDienThoaiPhuHuynh = soDienThoaiPhuHuynh;
+		this.birDate = birDate;
+		this.gioiTinh = gioiTinh;
+		this.diaChi = diaChi;
+		this.email = email;
+		this.idLopHoc = idLopHoc;
+		this.hinhAnh = hinhAnh;
+	}
+	
+	public SinhVien(String mssv, String hoVaTen, String soDienThoai, String soDienThoaiPhuHuynh, Date birDate,
+			String diaChi, String email, int idLopHoc, String hinhAnh, int id) {
+		super();
+		this.mssv = mssv;
+		this.hoVaTen = hoVaTen;
+		this.soDienThoai = soDienThoai;
+		this.soDienThoaiPhuHuynh = soDienThoaiPhuHuynh;
+		this.birDate = birDate;
+		this.diaChi = diaChi;
+		this.email = email;
+		this.idLopHoc = idLopHoc;
+		this.hinhAnh = hinhAnh;
+		this.id = id;
+	}
 	public SinhVien(String hoVaTen, String soDienThoai, Date birDate, String gioiTinh, String diaChi,
 			String email, int idLopHoc, String hinhAnh) {
 		super();
@@ -115,21 +186,8 @@ public class SinhVien {
 		this.idLopHoc = idLopHoc;
 		this.hinhAnh = hinhAnh;
 	}
-	public SinhVien(String mssv, String hoVaTen, String soDienThoai, Date birDate, String gioiTinh, String diaChi,
-			String email, int idLopHoc, String hinhAnh) {
-		super();
-		this.mssv = mssv;
-		this.hoVaTen = hoVaTen;
-		this.soDienThoai = soDienThoai;
-		this.birDate = birDate;
-		this.gioiTinh = gioiTinh;
-		this.diaChi = diaChi;
-		this.email = email;
-		this.idLopHoc = idLopHoc;
-		this.nameLopHoc = nameLopHoc;
-		this.hinhAnh = hinhAnh;
-	}
-	
+
+
 	
 
 }
