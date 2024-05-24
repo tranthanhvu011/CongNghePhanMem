@@ -40,6 +40,7 @@ public class ChuyenmucServlet extends HttpServlet {
 		if (action == null) {
 			LopHocModel lopHocModel = new LopHocModel();
 			List<LopHoc> lopHocs = lopHocModel.findAll();
+			System.out.println(lopHocs);
 			request.setAttribute("lopHoc", lopHocs);
 			request.setAttribute("p", "../admin/showcatalog.jsp");
 			request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);

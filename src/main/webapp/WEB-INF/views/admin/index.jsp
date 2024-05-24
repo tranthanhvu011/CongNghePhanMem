@@ -1,3 +1,7 @@
+<%@page import="com.demo.models.SinhVienModel"%>
+<%@page import="com.demo.models.LopHocModel"%>
+<%@page import="com.demo.models.GiaoVienModel"%>
+<%@page import="com.demo.entities.GiaoVien"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="com.mysql.cj.x.protobuf.MysqlxCrud.Order"%>
 <%@page import="com.demo.models.UserModel"%>
@@ -35,17 +39,24 @@
               <div class="table-responsive">
                 <table class="table align-items-center">
                   <tbody>
+                  <% GiaoVienModel giaoVienModel = new GiaoVienModel();
+                  LopHocModel lopHocModel = new LopHocModel();
+                  SinhVienModel sinhVienModel = new SinhVienModel();
+                  int count = sinhVienModel.totalSinhVien();
+                  int count1 = lopHocModel.totalLopHoc();
+                  int count2 = giaoVienModel.totalGiaoVien();
+                  %>
                     <tr>
                       <td><i class="fa fa-circle text-white mr-2"></i>Tổng Lớp Học</td>
-                      <td>${dog}</td>
+                      <td><%=count1 %></td>
                     </tr>
                      <tr>
                       <td><i class="fa fa-circle text-light-1 mr-2"></i>Tổng Giáo Viên</td>
-                      <td>${cat}</td>
+                      <td><%=count2 %></td>
                     </tr>
                     <tr>
                       <td><i class="fa fa-circle text-light-1 mr-2"></i>Tổng Sinh Viên</td>
-                      <td>${other }</td>
+                      <td><%=count %></td>
                     </tr>
 <%--                    <tr>--%>
 <%--                      <td><i class="fa fa-circle text-light-2 mr-2"></i>Hạt</td>--%>

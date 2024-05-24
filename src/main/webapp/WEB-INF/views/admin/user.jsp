@@ -201,7 +201,7 @@ $(document).ready(function() {
 										<td><img style="width: 100px; height: 50px; border: 2px soild red; border-radius: 5px" src="${pageContext.request.contextPath}/res/thumball/<%= sv.getHinhAnh()%>" alt="logo icon">
 										</td>
 										<td>
-											<button class="btn btn-danger delete-user" data-id="<%=sv.getId()%>">Xóa
+											<button class="btn btn-danger delete-user" data-id="Xóa
 											</button>
 											<a
 													href="${pageContext.request.contextPath}/admin/edituser?id=<%= sv.getId()%>">		<button class="btn btn-success">
@@ -216,26 +216,7 @@ $(document).ready(function() {
 									%>
 								</tbody>
 							</table>
-							<script>
-var contextPath = "${pageContext.request.contextPath}";
-$(document).on('click', '.btn-danger', function() {
-    var userId = $(this).data('id'); 
-    var url = contextPath + '/admin/quanliuser?action=delete&id=' + userId; 
-    console.log(userId);
-    if (confirm('Bạn có chắc chắn muốn xóa sinh viên này không?')) {
-        $.ajax({
-            url: url,
-            type: 'POST', 
-            success: function(response) {
-                alert('Xóa thành công');
-                location.reload();
-            },
-            error: function() {
-                alert('Lỗi khi xóa');
-            }
-        });
-    }
-});</script>
+						
 						</div>
 					</div>
 				</div>
