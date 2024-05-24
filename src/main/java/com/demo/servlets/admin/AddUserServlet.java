@@ -48,6 +48,7 @@ public class AddUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		if (action == null) {
 			doGet_Index(request, response);
@@ -66,6 +67,8 @@ public class AddUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("addUser")) {
 			doPost_AddUser(request, response);
@@ -74,13 +77,16 @@ public class AddUserServlet extends HttpServlet {
 
 	protected void doPost_AddUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		request.setCharacterEncoding("UTF-8");
+
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	        java.util.Date birthDate = null;
 		SinhVienModel sinhVienModel= new SinhVienModel();
 		SinhVien sinhVien = new SinhVien();
 		String mssv = request.getParameter("mssv");
 		String hoVaTen = request.getParameter("hoVaTen");
 		String phoneNumber = request.getParameter("phoneNumber");
+		String phoneNumberParents = request.getParameter("phoneNumberParents");
 		String dateOfBirth = request.getParameter("dateOfBirth");
 		String gioiTinh = request.getParameter("gioiTinh");
 		String address = request.getParameter("address");
@@ -94,7 +100,7 @@ public class AddUserServlet extends HttpServlet {
 		  try {	
 			       int classId = Integer.parseInt(idClass);
 	            birthDate = sdf.parse(dateOfBirth);
-	        	if (sinhVienModel.addSinhVien(new SinhVien(mssv,hoVaTen, phoneNumber, birthDate, gioiTinh, address, email, classId, newimage)) == true) {
+	        	if (sinhVienModel.addSinhVien(new SinhVien(mssv,hoVaTen, phoneNumber,phoneNumberParents, birthDate, gioiTinh, address, email, classId, newimage)) == true) {
 	    			request.getSession().setAttribute("message", "Tao thanh cong");
 	    			response.sendRedirect("quanliuser");
 	    		} else {
@@ -108,3 +114,4 @@ public class AddUserServlet extends HttpServlet {
 	}
 
 }
+
