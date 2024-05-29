@@ -75,7 +75,7 @@ public class AddUserServlet extends HttpServlet {
 			doPost_AddUser(request, response);
 		}
 	}
-	// 7.	Hệ thống xử lý yêu cầu thêm học sinh vào lớp học, kiểm tra thông tin của học sinh và xác nhận tính hợp lệ của nó.
+	// 5.	Hệ thống xử lý yêu cầu thêm học sinh vào lớp học, kiểm tra thông tin của học sinh và xác nhận tính hợp lệ của nó.
 	protected void doPost_AddUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
