@@ -45,10 +45,11 @@ public class AdminFilter extends HttpFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		HttpSession session = httpRequest.getSession();
-		Users user = (Users) session.getAttribute("user");
-		if (user != null && user.isAdmin() == true) {
+		Integer user = (Integer) session.getAttribute("user"); // Cast to Integer instead of int
+		System.out.println(user);
+		if (user != null && user == 1 || user == 2) {
 			chain.doFilter(request, response);
-		} else if (user != null && user.isAdmin() == false) {
+		} else if (user != null && user == 0) {
 			httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
 		}
 	}

@@ -41,6 +41,24 @@ public class UserModel {
 		}
 		return users;
 	}
+	public static int findNumberAdmin(String username1) {
+		String query = "select isAdmin from users where username = ?";
+	    int isAdmin = 0; // Giá trị mặc định nếu không tìm thấy người dùng hoặc lỗi xảy ra
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement(query);
+			preparedStatement.setString(1, username1);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				isAdmin = resultSet.getInt("isAdmin"); // Lấy giá trị của cột userType
+			}
+			resultSet.close();
+	        preparedStatement.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    return isAdmin; // Trả về userType có thể là 1, 2, hoặc 3
+
+	}
 
 // tra ve danh sach dua check isAdmin
 	public List<Users> findAllAdmin(boolean isAdmin) {

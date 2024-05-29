@@ -15,17 +15,16 @@
   response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
   response.setHeader("Pragma" , "no-cache");
   response.setHeader("Expires" , "0");
- 
+	Integer user = (Integer) session.getAttribute("user"); // Cast to Integer instead of int
   
   if (session.getAttribute("admin-username") == null){
 	  response.sendRedirect(request.getContextPath() + "/admin/login"); 
   }
-
   NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new java.util.Locale("vi", "VN"));
 
   
   %>
-  
+  <!-- 6.0.  Hệ thống đang ở trang quản lý lớp học: Tổng quan. -->
   <!-- Start header section -->
     <div class="content-wrapper">
       <div class="container-fluid">
@@ -55,7 +54,7 @@
                       <td><%=count2 %></td>
                     </tr>
                     <tr>
-                      <td><i class="fa fa-circle text-light-1 mr-2"></i>Tổng Sinh Viên</td>
+                      <td><i class="fa fa-circle text-light-1 mr-2"></i>Tổng Học Sinh</td>
                       <td><%=count %></td>
                     </tr>
 <%--                    <tr>--%>

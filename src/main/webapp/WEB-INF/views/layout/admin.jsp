@@ -29,7 +29,7 @@
 <link href="${pageContext.request.contextPath}/assets/admin/css/sidebar-menu.css" rel="stylesheet" />
 <link href="${pageContext.request.contextPath}/assets/admin/css/app-style.css" rel="stylesheet" />
 <%
-Users admin =(Users) request.getSession().getAttribute("user");
+Integer user = (Integer) session.getAttribute("user"); // Cast to Integer instead of int
 
 %>
 <style type="text/css">
@@ -72,7 +72,7 @@ Users admin =(Users) request.getSession().getAttribute("user");
           </a>
         </li>
         <li>
-<!-- 0.	Người dùng truy cập vào trang quản lý học sinh trong ứng dụng web. -->
+        <!-- 0.	Người dùng truy cập vào trang quản lý học sinh trong ứng dụng web. -->
           <a href="${pageContext.request.contextPath}/admin/quanliuser">
             <i class="zmdi zmdi-accounts"></i> <span>Học Sinh</span>
           </a>
@@ -113,8 +113,8 @@ Users admin =(Users) request.getSession().getAttribute("user");
                         alt="user avatar"></div>
                     <div class="media-body">
                       <h6 class="mt-2 user-title">Petshopwebsite</h6>
-                	<b> Admin:  <%= admin.getFullName() %></b>                         
-                    </div>
+<%--                 	<b> Admin:  <%= admin.getFullName() %></b>                         
+ --%>                    </div>
                   </div>
                 </a>
               </li>   

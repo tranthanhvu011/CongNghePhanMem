@@ -118,17 +118,25 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost_Login(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+	
 		String username = request.getParameter("username");
+		System.out.println(username);
 		String password = request.getParameter("password");
+		System.out.println(password);
 		UserModel userModel = new UserModel();
 		Users user = userModel.findUserByUserName(username);
+		int user1 =  userModel.findNumberAdmin(username);
+		System.out.println(user1);
 		if (userModel.checkLogin(username, password)) {
-			if (!user.isAdmin()) {
-				request.getSession().setAttribute("user", userModel.findUserByUserName(username));
+			if (user1 == 0) {
+				request.getSession().setAttribute("user", userModel.findNumberAdmin(username));
 				response.sendRedirect("home");
-			} else if (user.isAdmin()) {
+			} else if (user1 == 1) {
 				System.out.println("thanh cong");
-				request.getSession().setAttribute("user", userModel.findUserByUserName(username));
+				request.getSession().setAttribute("user", userModel.findNumberAdmin(username));
+				response.sendRedirect("admin/home");
+			}else if (user1 == 2) {
+				request.getSession().setAttribute("user", userModel.findNumberAdmin(username));
 				response.sendRedirect("admin/home");
 			}
 		} else {

@@ -16,8 +16,8 @@ if (session.getAttribute("admin-username") == null) {
 }
 
 %>
-<!-- 6.1.  Người dùng chọn vào Lớp Học.
-6.2.  Danh sách lớp học được hiển thị. -->
+<!-- 1.  Người dùng chọn vào Lớp Học.
+2.  Danh sách lớp học được hiển thị. -->
 <!-- Start header section -->
 <div class="content-wrapper">
 	<div class="container-fluid">
@@ -29,6 +29,8 @@ if (session.getAttribute("admin-username") == null) {
 										if (user == 2) {
 										%>
 										<% } else { %>
+										<!-- 3.  Người dùng chọn Thêm Lớp Học.
+										 -->
 				<button class="add-catalog">
 					<a
 						href="${pageContext.request.contextPath}/admin/addcatalog">Thêm Lớp Học</a>

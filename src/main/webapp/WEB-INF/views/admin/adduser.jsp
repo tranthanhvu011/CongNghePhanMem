@@ -15,7 +15,7 @@ List<LopHoc> lopHocs = lopHocModel.findAll();
        <% String message = (String) request.getAttribute("message");
 %>
         <div class="row mt-3">
-          <div class="col-lg-8">
+          <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
               <!--  8.	Hệ thống hiển thị một thông báo hoặc cảnh báo trên giao diện người dùng để thông báo rằng học sinh đã được thêm vào lớp học thành công.

@@ -21,11 +21,17 @@ List<LopHoc> lopHocs = lopHocModel.findAll();
 function navigateToCatalog() {
     window.location.href = "<%= request.getContextPath() %>/admin/chuyenmuc";
 }
+<% String message = (String) request.getAttribute("message");
+%>
 </script>
+
         <div class="row mt-3">
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
+              <% if(message != null) {%>
+              <h4 style="text-align: center"><%= message %></h4>
+              <% } %>
                 <div class="card-title">Thêm Giáo Viên</div>
                 <hr>
                 <form action="${pageContext.request.contextPath}/admin/addGiaoVien" method="post" enctype="multipart/form-data">
