@@ -215,8 +215,8 @@ $(document).ready(function() {
 										if (user == 2) {
 										%>
 										<% } else { %>
-								   <!-- 0.  Hệ thống đang ở trang Học Sinh 
-										1.  Người dùng chọn học sinh cần xóa và nhấn nút xóa -->
+								   <!-- 6.0.  Hệ thống đang ở trang Học Sinh 
+										6.1.  Người dùng chọn học sinh cần xóa và nhấn nút xóa -->
         <button class="btn btn-danger delete-user" data-id="<%=sv.getId()%>">Xóa</button>
         <a href="${pageContext.request.contextPath}/admin/edituser?id=<%= sv.getId()%>">
             <button class="btn btn-success">Sửa</button>
@@ -236,14 +236,13 @@ $(document).on('click', '.btn-danger', function() {
     var userId = $(this).data('id'); 
     var url = contextPath + '/admin/quanliuser?action=delete&id=' + userId; 
     console.log(userId);
-    //2.  Hệ thống thông báo xác nhận xóa về người dùng.
-    //3.1  Người dùng ấn “OK” để xác nhận.
-    //3.2 Người dùng ấn "HỦY "để hủy thao tác xóa
+    //6.2.  Hệ thống thông báo xác nhận xóa về người dùng.
+    //6.3.  Người dùng ấn “OK” để xác nhận.
     if (confirm('Bạn có chắc chắn muốn xóa học sinh này không?')) {
         $.ajax({
             url: url,
             type: 'POST', 
-            //6. Xóa thành công và load lại trang không còn học sinh đó nữa
+            //6.6. Xóa thành công và load lại trang không còn học sinh đó nữa
             success: function(response) {
                 alert('Xóa thành công');
                 location.reload();

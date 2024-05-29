@@ -33,11 +33,7 @@
 				</div>
 				<input type="submit" class="button" value="Đăng nhập">
 			</form>
-			<div class="signup">
-				<span class="signup">Chưa có tài khoản? <a
-					href="${pageContext.request.contextPath}/login?action=register">Đăng ký</a>
-				</span>
-			</div>
+			
 		</div>
 	</div>
 	<script

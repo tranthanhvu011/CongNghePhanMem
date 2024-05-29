@@ -50,11 +50,14 @@ public class AddGiaoVien extends HttpServlet {
 			System.out.println("Up load thanh cong");
 		}
 		  try {	
+
 	        	if (giaoVienModel.addGiaoVien(new GiaoVien(nameGiaoVien, ngaySinh, gioiTinh,diaChi, phoneNumber, email, newimage))) {
-	        		req.getSession().setAttribute("message", "Tao thanh cong");
-	    			resp.sendRedirect("quanligiaovien");
+	        		req.setAttribute("message", "Thêm Giáo Viên Thành Công");
+	    			req.setAttribute("p", "../admin/addGiaoVien.jsp");
+	    			req.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(req, resp);
+
 	    		} else {
-	    			req.getSession().setAttribute("message", "Tao that bai");
+	    			req.setAttribute("message", "Thêm Giáo Viên Thất Bại");
 	    			resp.sendRedirect("quanligiaovien");
 	    		}
 	        } catch (Exception e) {

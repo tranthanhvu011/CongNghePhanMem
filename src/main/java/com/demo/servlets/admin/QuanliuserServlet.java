@@ -60,8 +60,8 @@ public class QuanliuserServlet extends HttpServlet {
 		request.setAttribute("sinhVien", sinhViens);
 		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
 	}
-	//4.  Hệ thống xử lý yêu cầu xóa trong cơ sở dữ liệu.
-	// 5.  Cơ sở dữ liệu xác nhận và thực hiện yêu cầu xóa.
+	//6.4.  Hệ thống xử lý yêu cầu xóa trong cơ sở dữ liệu.
+	// 6.5.  Cơ sở dữ liệu xác nhận và thực hiện yêu cầu xóa.
 	protected void doGet_Remove(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");

@@ -27,9 +27,15 @@ LopHocModel lopHocModel = new LopHocModel();
 
 		<div class="row mt-3">
 			<div class="col-lg-12">
+											<% 
+										Integer user = (Integer) session.getAttribute("user"); 
+										if (user == 2) {
+										%>
+										<% } else { %>
 				<button class="add-catalog">
 					<a href="${pageContext.request.contextPath}/admin/addGiaoVien">Thêm Giáo Viên</a>
 				</button>
+				<%} %>
 			<div style="display: flex; justify-content: space-between;">
   <div>
    <div style="display: flex; justify-content: space-between; margin: 5px">
@@ -105,7 +111,7 @@ $(document).ready(function() {
 			<div class="col-lg-12">
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title">Danh sách Học sinh</h5>
+						<h5 class="card-title">Danh sách Giáo Viên</h5>
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<thead>
@@ -134,6 +140,10 @@ $(document).ready(function() {
 										<td> <%=giaoVien.getEmail() %></td>
 										<td> <img style="width: 100px; height: 50px; border: 2px soild red; border-radius: 5px" src="${pageContext.request.contextPath}/res/thumball/<%=giaoVien.getAnhDaiDien() %>" alt="logo icon">
 										</td>
+													<% 
+										if (user == 2) {
+										%>
+										<% } else { %>
 										<td>
 											<button class="btn btn-danger delete-user" data-id="<%= giaoVien.getId()%> " name="action">Xóa
 											</button>
@@ -141,7 +151,10 @@ $(document).ready(function() {
 													href="${pageContext.request.contextPath}/admin/editGiaoVien?id=<%=giaoVien.getId()%>">	
 														<button class="btn btn-success">
 											Sửa</button></a>
+																													<% } %>
+											
 										</td>
+										
 									</tr>
 								<% } %>
 								</tbody>
