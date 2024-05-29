@@ -18,7 +18,7 @@ List<LopHoc> lopHocs = lopHocModel.findAll();
           <div class="col-lg-8">
             <div class="card">
               <div class="card-body">
-              <!--  7.	Hệ thống hiển thị một thông báo hoặc cảnh báo trên giao diện người dùng để thông báo rằng học sinh đã được thêm vào lớp học thành công.
+              <!--  8.	Hệ thống hiển thị một thông báo hoặc cảnh báo trên giao diện người dùng để thông báo rằng học sinh đã được thêm vào lớp học thành công.
                -->
                <% if(message != null) {%>
               <h4 style="text-align: center"><%= message %></h4>
