@@ -72,6 +72,7 @@ Users admin =(Users) request.getSession().getAttribute("user");
           </a>
         </li>
         <li>
+<!-- 0.	Người dùng truy cập vào trang quản lý học sinh trong ứng dụng web. -->
           <a href="${pageContext.request.contextPath}/admin/quanliuser">
             <i class="zmdi zmdi-accounts"></i> <span>Học Sinh</span>
           </a>

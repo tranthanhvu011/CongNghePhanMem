@@ -45,6 +45,7 @@ public class AddUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	// Thực hiện doGet thông thường để chuyển dữ liệu qua trang admin/adduser.jsp
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -74,11 +75,11 @@ public class AddUserServlet extends HttpServlet {
 			doPost_AddUser(request, response);
 		}
 	}
-
+	// 5.	Hệ thống xử lý yêu cầu thêm học sinh vào lớp học, kiểm tra thông tin của học sinh và xác nhận tính hợp lệ của nó.
 	protected void doPost_AddUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
+		// Lấy dữ liệu từ request
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	        java.util.Date birthDate = null;
 		SinhVienModel sinhVienModel= new SinhVienModel();
@@ -92,6 +93,7 @@ public class AddUserServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		String email = request.getParameter("email");
 		String idClass = request.getParameter("className");
+		// Lấy dữ liệu hình ảnh và chuyển qua dạng String
 	    Part filePart = request.getPart("studentImage"); 
 		String newimage = UploadFileHelper.uploadFile("res\\thumball", request, filePart);
 		if (newimage != null) {
@@ -100,12 +102,37 @@ public class AddUserServlet extends HttpServlet {
 		  try {	
 			       int classId = Integer.parseInt(idClass);
 	            birthDate = sdf.parse(dateOfBirth);
+	            // Kiểm tra và insert học sinh vào database
+	           // 6.	Nếu thông tin của học sinh hợp lệ, hệ thống cập nhật dữ liệu trong cơ sở dữ liệu để thêm học sinh vào lớp học. Đồng thời, hệ thống cũng cập nhật thông tin về số lượng học sinh trong lớp học.
+	            if (mssv.isEmpty()) {
+	            	request.setAttribute("message", "Vui Lòng Nhập Số Thứ Tự");
+	        		request.setAttribute("p", "../admin/adduser.jsp");
+	        		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
+				}else if (hoVaTen.isEmpty()) {
+			    	request.setAttribute("message", "Vui Lòng Nhập Họ Và Tên");
+	        		request.setAttribute("p", "../admin/adduser.jsp");
+	        		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
+				}else if (phoneNumber.isEmpty()) {
+			    	request.setAttribute("message", "Vui Lòng Nhập Số Điện Thoại");
+	        		request.setAttribute("p", "../admin/adduser.jsp");
+	        		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
+				}else if (dateOfBirth.isEmpty()) {
+			    	request.setAttribute("message", "Vui Lòng Nhập Ngày Sinh");
+	        		request.setAttribute("p", "../admin/adduser.jsp");
+	        		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
+				}else if (gioiTinh.isEmpty()) {
+			    	request.setAttribute("message", "Vui Lòng Chọn Giới Tính");
+	        		request.setAttribute("p", "../admin/adduser.jsp");
+	        		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
+				}else
 	        	if (sinhVienModel.addSinhVien(new SinhVien(mssv,hoVaTen, phoneNumber,phoneNumberParents, birthDate, gioiTinh, address, email, classId, newimage)) == true) {
-	    			request.getSession().setAttribute("message", "Tao thanh cong");
-	    			response.sendRedirect("quanliuser");
+	        		request.setAttribute("message", "Thêm học sinh thành công");
+	        		request.setAttribute("p", "../admin/adduser.jsp");
+	        		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
 	    		} else {
-	    			request.getSession().setAttribute("message", "Tao that bai");
-	    			response.sendRedirect("quanliuser");
+	    			request.setAttribute("message", "Thêm học sinh thất bại");
+	        		request.setAttribute("p", "../admin/adduser.jsp");
+	        		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
 	    		}
 	        } catch (ParseException e) {
 	            e.printStackTrace();

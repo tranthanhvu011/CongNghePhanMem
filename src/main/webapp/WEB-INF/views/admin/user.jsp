@@ -13,6 +13,7 @@ response.setHeader("Pragma", "no-cache");
 response.setHeader("Expires", "0");
 SinhVienModel sinhVienModel = new SinhVienModel();
 List<SinhVien> sinhViens = (List<SinhVien>) request.getAttribute("sinhVien");
+Integer user = (Integer) session.getAttribute("user"); // Cast to Integer instead of int
 
 if (session.getAttribute("admin-username") == null) {
 	response.sendRedirect(request.getContextPath() + "/admin/login");
@@ -25,9 +26,16 @@ LopHocModel lopHocModel = new LopHocModel();
 
 		<div class="row mt-3">
 			<div class="col-lg-12">
+							<% 
+										if (user == 2) {
+										%>
+										<% } else { %>
+				<!--1.	Hiển thị màn hình quản lý học sinh
+					2.	Trên trang quản lý học sinh, người dùng chọn chức năng "Thêm học sinh" từ giao diện trực tiếp của lớp học.  -->
 				<button class="add-catalog">
 					<a href="${pageContext.request.contextPath}/admin/adduser">Thêm Học Sinh</a>
 				</button>
+				<% } %>
 			<div style="display: flex; justify-content: space-between;">
   <div>
    <div style="display: flex; justify-content: space-between; margin: 5px">
@@ -171,6 +179,7 @@ $(document).ready(function() {
 							<table class="table table-striped">
 								<thead>
 									<tr>
+									<!-- Các cột thông tin của học sinh -->
                                         <th scope="col">STT</th>
 										<th scope="col">Họ và tên</th>
 										<th scope="col">Số điện thoại</th>
@@ -185,7 +194,8 @@ $(document).ready(function() {
 									</tr>
 								</thead>
 								<tbody>
-									<%
+<!-- 								Duyệt vòng lập foreach để lấy ra thông tin của từng học sinh
+ -->									<%
 									for (SinhVien sv : sinhViens) {
 									%>
 									<tr>
@@ -201,14 +211,17 @@ $(document).ready(function() {
 										<td><img style="width: 100px; height: 50px; border: 2px soild red; border-radius: 5px" src="${pageContext.request.contextPath}/res/thumball/<%= sv.getHinhAnh()%>" alt="logo icon">
 										</td>
 										<td>
-											<button class="btn btn-danger delete-user" data-id="Xóa
-											</button>
-											<a
-													href="${pageContext.request.contextPath}/admin/edituser?id=<%= sv.getId()%>">		<button class="btn btn-success">
-											Sửa</button></a>
-									
-											
-						
+									<% 
+										if (user == 2) {
+										%>
+										<% } else { %>
+								   <!-- 6.0.  Hệ thống đang ở trang Học Sinh 
+										6.1.  Người dùng chọn học sinh cần xóa và nhấn nút xóa -->
+        <button class="btn btn-danger delete-user" data-id="<%=sv.getId()%>">Xóa</button>
+        <a href="${pageContext.request.contextPath}/admin/edituser?id=<%= sv.getId()%>">
+            <button class="btn btn-success">Sửa</button>
+        </a>
+<% } %>				
 										</td>
 									</tr>
 									<%
@@ -216,7 +229,30 @@ $(document).ready(function() {
 									%>
 								</tbody>
 							</table>
-						
+<!-- 							Ajax để xóa 1 học sinh theo id
+ --><script>
+var contextPath = "${pageContext.request.contextPath}";
+$(document).on('click', '.btn-danger', function() {
+    var userId = $(this).data('id'); 
+    var url = contextPath + '/admin/quanliuser?action=delete&id=' + userId; 
+    console.log(userId);
+    //6.2.  Hệ thống thông báo xác nhận xóa về người dùng.
+    //6.3.  Người dùng ấn “OK” để xác nhận.
+    if (confirm('Bạn có chắc chắn muốn xóa học sinh này không?')) {
+        $.ajax({
+            url: url,
+            type: 'POST', 
+            //6.6. Xóa thành công và load lại trang không còn học sinh đó nữa
+            success: function(response) {
+                alert('Xóa thành công');
+                location.reload();
+            },
+            error: function() {
+                alert('Lỗi khi xóa');
+            }
+        });
+    }
+});</script>
 						</div>
 					</div>
 				</div>
