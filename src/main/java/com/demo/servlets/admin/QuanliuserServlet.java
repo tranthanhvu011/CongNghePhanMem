@@ -1,6 +1,7 @@
 package com.demo.servlets.admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,10 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.checkerframework.checker.units.qual.g;
+
 import com.demo.models.*;
 import com.demo.entities.*;
 
 import com.demo.models.UserModel;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class LoginAdminServlet
@@ -39,6 +44,7 @@ public class QuanliuserServlet extends HttpServlet {
 		if (action == null) {
 			doGet_Index(request, response);
 		} else if (action.equalsIgnoreCase("delete")) {
+			doGet_Remove(request, response);
 		}
 	}
 
@@ -51,7 +57,7 @@ public class QuanliuserServlet extends HttpServlet {
 		request.setAttribute("sinhVien", sinhViens);
 		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

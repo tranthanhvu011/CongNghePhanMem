@@ -73,6 +73,7 @@ public class UserModel {
 		}
 		return users;
 	}
+	
 
 // ham dang ky
 	public boolean create(Users user) {

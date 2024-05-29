@@ -73,7 +73,12 @@ Users admin =(Users) request.getSession().getAttribute("user");
         </li>
         <li>
           <a href="${pageContext.request.contextPath}/admin/quanliuser">
-            <i class="zmdi zmdi-accounts"></i> <span>Sinh Viên</span>
+            <i class="zmdi zmdi-accounts"></i> <span>Học Sinh</span>
+          </a>
+        </li>
+           <li>
+          <a href="${pageContext.request.contextPath}/admin/quanligiaovien">
+            <i class="zmdi zmdi-accounts"></i> <span>Giáo Viên</span>
           </a>
         </li>
         <li>
