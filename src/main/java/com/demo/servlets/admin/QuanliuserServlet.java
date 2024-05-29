@@ -40,14 +40,17 @@ public class QuanliuserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		// lấy action từ request
 		String action = request.getParameter("action");
+		// kiểm tra nếu null thì sẽ đưa về trang mình set ở doGet_Index
 		if (action == null) {
 			doGet_Index(request, response);
+			// ngược lại thì ở doGet_Remove
 		} else if (action.equalsIgnoreCase("delete")) {
 			doGet_Remove(request, response);
 		}
 	}
-
+	// Hàm doget đưa về trang /admin/user.jsp
 	protected void doGet_Index(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -56,6 +59,21 @@ public class QuanliuserServlet extends HttpServlet {
 		List<SinhVien> sinhViens = sinhVienModel.findAll();
 		request.setAttribute("sinhVien", sinhViens);
 		request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
+	}
+	//6.4.  Hệ thống xử lý yêu cầu xóa trong cơ sở dữ liệu.
+	// 6.5.  Cơ sở dữ liệu xác nhận và thực hiện yêu cầu xóa.
+	protected void doGet_Remove(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String id = request.getParameter("id");
+		SinhVienModel sinhVienModel = new SinhVienModel();
+		// xóa cột với id lấy từ request
+		if (sinhVienModel.removeHocSinh(Integer.parseInt(id))) {
+			response.sendRedirect("quanliuser");
+		}else {
+			request.setAttribute("p", "../admin/user.jsp");
+			request.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(request, response);
+
+		}
 	}
 	
 	/**
