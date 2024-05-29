@@ -16,17 +16,24 @@ if (session.getAttribute("admin-username") == null) {
 }
 
 %>
+<!-- 6.1.  Người dùng chọn vào Lớp Học.
+6.2.  Danh sách lớp học được hiển thị. -->
 <!-- Start header section -->
 <div class="content-wrapper">
 	<div class="container-fluid">
 		<!--End Row-->
 		<div class="row">
 			<div class="col-lg-12">
+							<% 
+										Integer user = (Integer) session.getAttribute("user"); 
+										if (user == 2) {
+										%>
+										<% } else { %>
 				<button class="add-catalog">
 					<a
 						href="${pageContext.request.contextPath}/admin/addcatalog">Thêm Lớp Học</a>
 				</button>
-				
+				<% } %>
 			</div>
 			<div class="col-lg-12">
 				<div class="card">
@@ -48,10 +55,20 @@ if (session.getAttribute("admin-username") == null) {
 											<td><%= lopHoc1.getNameGiaoVien()%></td>
 											<td><%= lopHoc1.getTenLopHoc()%></td>
 											<td>
-											
+											<!-- 6.0.	Truy cập trang quản lý lớp học .
+											6.1.	Hiển thị giao diện lớp học
+											6.2.	Người dùng nhấn nút xem học sinh trên giao diện -->
 									<button class="btn btn-primary" data-toggle="modal" data-target="#modal_<%= lopHoc1.getId() %>">
-									Xem Sinh Viên</button>
+									Xem Học Sinh</button>
 																				<td>
+				
+											<% 
+										if (user == 2) {%>
+											<a
+													href="${pageContext.request.contextPath}/admin/getMonHoc?id=<%=lopHoc1.getId()%>"><button class="btn btn-info">
+												
+											Xem Thời Khóa Biểu</button></a>
+										<% } else { %>	
 								<a
 													href="${pageContext.request.contextPath}/admin/addTKB?id=<%=lopHoc1.getId()%>">	<button class="btn btn-danger">
 												Thêm Thời Khóa Biểu
@@ -65,8 +82,15 @@ if (session.getAttribute("admin-username") == null) {
 													href="${pageContext.request.contextPath}/admin/getMonHoc?id=<%=lopHoc1.getId()%>"><button class="btn btn-info">
 												
 											Xem Thời Khóa Biểu</button></a>
+											<%} %>
 					<td>		
+			   <!--6.3.	Hệ thống gửi yêu cầu đến cơ sở dữ liệu để lấy danh sách học sinh lớp đó -->
 									<%List<SinhVien> svList1 = SinhVienModel.listSinhVienByIDLopHoc(lopHoc1.getId()); %>
+									<!--6.4.	Cơ sở dữ liệu nhận được yêu cầu sẽ phản hồi lại danh sách học sinh cho giao diện
+									5.1.  Hệ thống sẽ trả lại cho người dùng danh sách học sinh của lớp học đó.
+									*Nếu lớp học đó không có học sinh
+									5.2.  Hệ thống sẽ vẫn hiễn thị ra giao diện nhưng không có học sinh nào hết.
+									6.5 Kết thúc Use Case -->
 <div class="modal fade" id="modal_<%= lopHoc1.getId()%>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div style=" margin-right: 750px" class="modal-dialog modal-lg">
             <div style=" margin-right: 550px" class="modal-content">
