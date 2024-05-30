@@ -29,6 +29,36 @@ public class LopHocModel {
 		return null;
 		}
 			}
+	public static int countNameLopHoc(String nameLopHoc) {
+	    String query = "SELECT count(*) FROM lophoc WHERE tenLopHoc = ?";
+	    try {
+	        PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement(query);
+	        preparedStatement.setString(1, nameLopHoc);
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        if (resultSet.next()) {
+	            return resultSet.getInt(1);
+	        }
+	        return 0;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return 0;
+	    }
+	}
+	public static int countByIDTeacher(int IdNe) {
+		String query = "select count(*) from lophoc where giaoVienChuNhiem = ?";
+		try {
+			PreparedStatement preparedStatement = ConnectDB.connection().prepareStatement(query);
+			preparedStatement.setInt(1, IdNe);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				return resultSet.getInt(1);
+			}
+			return 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
 	public static int totalLopHoc() {
 	    String query = "SELECT COUNT(*) FROM lophoc";
 	    try {
@@ -77,6 +107,6 @@ public class LopHocModel {
 		return false;
 	}
 	public static void main(String[] args) {
-		System.out.println(findAll());
+		System.out.println(countNameLopHoc("12A"));
 	}
 }

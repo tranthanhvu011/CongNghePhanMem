@@ -30,6 +30,7 @@ public class GiaoVienModel {
 			return false;
 		}
 	}
+	
 	public static int totalGiaoVien() {
 	    String query = "SELECT COUNT(*) FROM giaovien";
 	    try {
