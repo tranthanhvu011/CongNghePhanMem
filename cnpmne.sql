@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 24, 2024 lúc 06:29 PM
+-- Thời gian đã tạo: Th5 29, 2024 lúc 07:56 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -59,7 +59,8 @@ CREATE TABLE `giaovien` (
 --
 
 INSERT INTO `giaovien` (`id`, `nameGiaoVien`, `ngaySinh`, `gioiTinh`, `diaChi`, `soDienThoai`, `email`, `anhDaiDien`) VALUES
-(6, 'Trần Thanh Vũ', '2003-04-10', 'Nam', 'Dĩ An', '0379886918', 'lethicuba@gmail.com', '51e2b6facb124afea37f69a4da45425d.jpg');
+(32, 'Nguyễn Văn A', '1996-04-10', 'Nam', 'Thành Phố Hồ Chí Minh', '0379886918', 'a@gmail.com', '124dc122229a4ed485977735fd9076f1.jpg'),
+(33, 'Nguyễn Văn B', '2003-09-10', 'Nam', 'Thành Phố Hồ Chí Minh', '0379886912', 'lethicuba1004@gmail.com', '0e7a1a25f2fe4834a7afdfef86c3c2ad.jpg');
 
 -- --------------------------------------------------------
 
@@ -78,10 +79,10 @@ CREATE TABLE `lophoc` (
 --
 
 INSERT INTO `lophoc` (`id`, `giaoVienChuNhiem`, `tenLopHoc`) VALUES
-(38, 3, '12A'),
-(40, 4, '13A'),
-(41, 6, '12A'),
-(42, 6, '12B');
+(54, 32, 'Lớp 11A'),
+(55, 32, '12A'),
+(56, 32, '11B'),
+(57, 32, '10B');
 
 -- --------------------------------------------------------
 
@@ -103,6 +104,13 @@ CREATE TABLE `sinhvien` (
   `hinhAnh` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `sinhvien`
+--
+
+INSERT INTO `sinhvien` (`id`, `MSSV`, `hoVaTen`, `soDienThoai`, `soDienThoaiPhuHuynh`, `birthday`, `gioiTinh`, `diaChi`, `email`, `idLopHoc`, `hinhAnh`) VALUES
+(70, '2', 'Trần Thanh A', '0379886918', '0378591358', '2010-09-10', 'Nam', 'Dĩ An Bình Dương', 'ngusidan123@gmail.com', 54, '77950bdb4f6a4510aa08421ef37e632e.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -119,13 +127,6 @@ CREATE TABLE `thoikhoabieu` (
   `idLopHoc` int(11) DEFAULT NULL,
   `buoi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `thoikhoabieu`
---
-
-INSERT INTO `thoikhoabieu` (`id`, `thu2`, `thu3`, `thu4`, `thu5`, `thu6`, `idLopHoc`, `buoi`) VALUES
-(26, '{\"MonHoc\":[{\"Tiet\":\"1\",\"TenMon1\":\"Toán\",\"GiaoVien1\":\"6\",\"ThoiGian1\":\"45 Phút\"},{\"Tiet\":\"2\",\"TenMon2\":\"Toán\",\"ThoiGian2\":\"45 Phút\",\"GiaoVien2\":\"6\"},{\"TenMon3\":\"\",\"Tiet\":\"3\",\"GiaoVien3\":\"6\",\"ThoiGian3\":\"45 Phút\"},{\"GiaoVien4\":\"6\",\"TenMon4\":\"\",\"Tiet\":\"4\",\"ThoiGian4\":\"45 Phút\"},{\"GiaoVien5\":\"6\",\"ThoiGian5\":\"45 Phút\",\"TenMon5\":\"\",\"Tiet\":\"5\"}]}', '{\"MonHoc1\":[{\"Tiet\":\"1\",\"TenMon1\":\"\",\"GiaoVien1\":\"6\",\"ThoiGian1\":\"45 Phút\"},{\"Tiet\":\"2\",\"TenMon2\":\"\",\"ThoiGian2\":\"45 Phút\",\"GiaoVien2\":\"6\"},{\"TenMon3\":\"\",\"Tiet\":\"3\",\"GiaoVien3\":\"6\",\"ThoiGian3\":\"45 Phút\"},{\"GiaoVien4\":\"6\",\"TenMon4\":\"\",\"Tiet\":\"4\",\"ThoiGian4\":\"45 Phút\"},{\"GiaoVien5\":\"6\",\"ThoiGian5\":\"45 Phút\",\"TenMon5\":\"\",\"Tiet\":\"5\"}]}', '{\"MonHoc2\":[{\"Tiet\":\"1\",\"TenMon1\":\"\",\"GiaoVien1\":\"6\",\"ThoiGian1\":\"45 Phút\"},{\"Tiet\":\"2\",\"TenMon2\":\"\",\"ThoiGian2\":\"45 Phút\",\"GiaoVien2\":\"6\"},{\"TenMon3\":\"\",\"Tiet\":\"3\",\"GiaoVien3\":\"6\",\"ThoiGian3\":\"45 Phút\"},{\"GiaoVien4\":\"6\",\"TenMon4\":\"\",\"Tiet\":\"4\",\"ThoiGian4\":\"45 Phút\"},{\"GiaoVien5\":\"6\",\"ThoiGian5\":\"45 Phút\",\"TenMon5\":\"\",\"Tiet\":\"5\"}]}', '{\"MonHoc3\":[{\"Tiet\":\"1\",\"TenMon1\":\"\",\"GiaoVien1\":\"6\",\"ThoiGian1\":\"45 Phút\"},{\"Tiet\":\"2\",\"TenMon2\":\"\",\"ThoiGian2\":\"45 Phút\",\"GiaoVien2\":\"6\"},{\"TenMon3\":\"\",\"Tiet\":\"3\",\"GiaoVien3\":\"6\",\"ThoiGian3\":\"45 Phút\"},{\"GiaoVien4\":\"6\",\"TenMon4\":\"\",\"Tiet\":\"4\",\"ThoiGian4\":\"45 Phút\"},{\"GiaoVien5\":\"6\",\"ThoiGian5\":\"45 Phút\",\"TenMon5\":\"\",\"Tiet\":\"5\"}]}', '{\"MonHoc4\":[{\"Tiet\":\"1\",\"TenMon1\":\"\",\"GiaoVien1\":\"6\",\"ThoiGian1\":\"45 Phút\"},{\"Tiet\":\"2\",\"TenMon2\":\"\",\"ThoiGian2\":\"45 Phút\",\"GiaoVien2\":\"6\"},{\"TenMon3\":\"\",\"Tiet\":\"3\",\"GiaoVien3\":\"6\",\"ThoiGian3\":\"45 Phút\"},{\"GiaoVien4\":\"6\",\"TenMon4\":\"\",\"Tiet\":\"4\",\"ThoiGian4\":\"45 Phút\"},{\"GiaoVien5\":\"6\",\"ThoiGian5\":\"45 Phút\",\"TenMon5\":\"\",\"Tiet\":\"5\"}]}', 41, 0);
 
 -- --------------------------------------------------------
 
@@ -216,19 +217,19 @@ ALTER TABLE `diem`
 -- AUTO_INCREMENT cho bảng `giaovien`
 --
 ALTER TABLE `giaovien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT cho bảng `lophoc`
 --
 ALTER TABLE `lophoc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT cho bảng `sinhvien`
 --
 ALTER TABLE `sinhvien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT cho bảng `thoikhoabieu`

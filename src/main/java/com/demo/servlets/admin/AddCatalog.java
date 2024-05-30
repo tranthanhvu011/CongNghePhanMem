@@ -27,7 +27,19 @@ public class AddCatalog extends HttpServlet {
 		LopHocModel lopHocModel = new LopHocModel();
 		String nameTearcher = req.getParameter("catalogname");
 		String nameLopHoc = req.getParameter("className");
-		if (nameTearcher.isEmpty()) {
+		if (lopHocModel.countByIDTeacher(Integer.parseInt(nameTearcher)) >= 1) {
+			req.setAttribute("message", "Giáo Viên Này Đã Là Giáo Viên Chủ Nhiệm Của 1 Lớp Học Khác Rồi");
+			req.setAttribute("p", "../admin/addcatalog.jsp");
+			req.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(req, resp);
+			return;
+		}
+		if (lopHocModel.countNameLopHoc(nameLopHoc) >= 1) {
+			req.setAttribute("message", "Đã có lớp học này rồi");
+			req.setAttribute("p", "../admin/addcatalog.jsp");
+			req.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(req, resp);
+			return;
+			}
+		 if (nameTearcher.isEmpty()) {
 			req.setAttribute("message", "Vui Lòng Chọn Giáo Viên");
 			req.setAttribute("p", "../admin/addcatalog.jsp");
 			req.getRequestDispatcher("/WEB-INF/views/layout/admin.jsp").forward(req, resp);
